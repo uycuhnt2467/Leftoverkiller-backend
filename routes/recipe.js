@@ -1,34 +1,31 @@
 var express = require("express");
 var router = express.Router();
 
-// const MemberModifyMethod = require("../controllers/member_controller");
+const RecipeModifyMethod = require("../controllers/recipe_controller");
 
-memberModifyMethod = new MemberModifyMethod();
+recipeModifyMethod = new RecipeModifyMethod();
+
 
 // return all recipes
-router.get("/", () => {
-    return "a";
-});
+router.get("/allRecipes", recipeModifyMethod.getAcquireAllRecipes);
 
-// return one specfic recipes
-router.get("/:recipeId", () => {
-    return "a";
-});
+// retun one specfic recipes
+router.get("/recipe/:recipeId", recipeModifyMethod.getSpecificRecipe);
 
-// return one specfic recipes
-router.post("/", () => {
-    return "a";
-});
+// add new one specfic recipes, administrator only *
+// router.post("/r", () => {
+//     return "a";
+// });
 
-// revise one specfic recipes
-router.put("/", () => {
-    return "a";
-});
+// revise one specfic recipes, administrator only *
+// router.put("/", () => {
+//     return "a";
+// });
 
-// delete one specfic recipes
-router.delete("/", () => {
-    return "a";
-});
+// delete one specfic recipes, administrator only *
+// router.delete("/", () => {
+//     return "a";
+// });
 
 
 // router.post("/login", memberModifyMethod.postLogin);

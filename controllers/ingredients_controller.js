@@ -1,8 +1,5 @@
-const jwt = require("jsonwebtoken");
 
-const config = require("../config/development_config");
 const Check = require("../service/member_check");
-
 const toRegister = require("../models/member/register_model");
 const encryption = require("../models/member/encryption_model");
 const loginAction = require("../models/member/login_model");
