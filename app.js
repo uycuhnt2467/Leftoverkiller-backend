@@ -11,6 +11,7 @@ var recipeRouter = require("./routes/recipe");
 var ingredientRouter = require("./routes/ingredient");
 var pantryRouter = require("./routes/pantry");
 var favoriteRouter = require("./routes/favorite");
+var checkLogRouter = require("./routes/checkLog");
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use("/recipe/", recipeRouter);
 app.use("/ingredient/", ingredientRouter);
 app.use("/pantry/", pantryRouter);
 app.use("/favorite/", favoriteRouter);
+app.use("/checkLog", checkLogRouter);
 
 // app.use('/users', usersRouter);
 

@@ -5,7 +5,6 @@ const RecipeModifyMethod = require("../controllers/recipe_controller");
 
 recipeModifyMethod = new RecipeModifyMethod();
 
-
 // return all recipes
 router.get("/", recipeModifyMethod.getAcquireAllRecipes);
 
@@ -26,7 +25,6 @@ router.get("/:recipeId", recipeModifyMethod.getSpecificRecipe);
 // router.delete("/", () => {
 //     return "a";
 // });
-
 
 // router.post("/login", memberModifyMethod.postLogin);
 // router.put("/update", memberModifyMethod.putUpdate);

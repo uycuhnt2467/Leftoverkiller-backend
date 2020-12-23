@@ -5,9 +5,8 @@ const IngredientsModifyMethod = require("../controllers/ingredients_controller")
 
 ingredientsModifyMethod = new IngredientsModifyMethod();
 
+router.get("/", ingredientsModifyMethod.getAcquireAllIngredients);
 
-router.get("/", ingredientsModifyMethod.getAcquireAllIngredients)
-
-router.get("/:ingredient_id", ingredientsModifyMethod.getSpecificIngredient)
+router.get("/:ingredient_id", ingredientsModifyMethod.getSpecificIngredient);
 
 module.exports = router;
