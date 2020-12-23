@@ -1,53 +1,59 @@
 const db = require("../connection_db");
-const checkPantryExist = require("./checkPantryExist");
+const checkFavoriteExist = require("./checkFavoriteExist");
 
-module.exports = function getIngredientFromPantry(pantryGetData) {
+module.exports = function getDataFromPantry(pantryGetData) {
     let result = {};
     return new Promise((resolve, reject) => {
-        // 尋找是否有重複的email
         db.query(
-            "SELECT * FROM user_ingredient WHERE user_id = ?",
+            "SELECT * FROM user_recipe WHERE user_id = ?",
             [pantryGetData.user_id],
             function (err, rows) {
                 // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
                 if (err) {
                     console.log(err);
-                    result.status = "查詢pantry失敗。";
+                    result.status = "查詢favorite失敗。";
                     result.err = "伺服器錯誤，請稍後在試！";
                     reject(result);
                     return;
                 }
-                const ingredientList = rows.map((val) => {
-                    return val.ingredient_id;
+                const recipeList = rows.map((val) => {
+                    return val.recipe_id;
                 });
-                console.log(ingredientList);
-                if (ingredientList.length > 0) {
+                console.log(recipeList);
+                if (recipeList.length > 0) {
                     db.query(
-                        "SELECT * FROM ingredient WHERE ingredient_id in (?)",
-                        [ingredientList],
-                        function (err, ingrRows) {
+                        "SELECT * FROM recipe WHERE recipe_id in (?)",
+                        [recipeList],
+                        function (err, recipeRows) {
                             if (err) {
                                 console.log(err);
-                                result.status = "查詢ingredient失敗。";
+                                result.success = false;
+                                result.status = "查詢recipe失敗。";
                                 result.err = "伺服器錯誤，請稍後在試！";
                                 reject(result);
                                 return;
                             }
 
-                            const ingredient_info = ingrRows.map((val) => {
+                            const recipeList_info = recipeRows.map((val) => {
                                 return {
-                                    ingredient_id: val.ingredient_id,
-                                    ingredient_name: val.ingredient_name,
+                                    recipe_id: val.recipe_id,
+                                    recipe_name: val.recipe_name,
                                     img_url: val.imageURL,
                                 };
                             });
                             result = {
                                 success: true,
-                                ingredients: ingredient_info,
+                                recipes: recipeList_info,
                             };
                             resolve(result);
                         }
                     );
+                } else {
+                    result = {
+                        success: true,
+                        recipes: {},
+                    };
+                    resolve(result);
                 }
             }
         );

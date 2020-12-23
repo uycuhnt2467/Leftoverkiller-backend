@@ -1,65 +1,67 @@
 const db = require("../connection_db");
-const checkPantryExist = require("./checkPantryExist");
+const checkFavoriteExist = require("./checkFavoriteExist");
 
-module.exports = function addIngredientToPantry(pantryAddData) {
+module.exports = function deleteRecipeFromFavorite(favoriteDeleteData) {
     let result = {};
     return new Promise((resolve, reject) => {
         db.query(
-            "SELECT ingredient_id FROM ingredient WHERE ingredient_name = ?",
-            [pantryAddData.ingredient_name],
+            "SELECT recipe_id FROM recipe WHERE recipe_id = ?",
+            [favoriteDeleteData.recipe_id],
             function (err, rows) {
                 // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
                 if (err) {
                     console.log(err);
                     result.success = false;
-                    result.status = "加入失敗。";
+                    result.status = "刪除失敗。";
                     result.err = "伺服器錯誤，請稍後在試！";
                     reject(result);
                     return;
                 }
                 if (rows.length == 0) {
-                    result.status = "加入失敗。";
-                    result.err =
-                        "此材料不存在於資料庫中，請從下拉選單中選取最接近的材料！";
+                    result.success = false;
+                    result.status = "刪除失敗。";
+                    result.err = "此食譜不存在於資料庫中，無法刪除！";
                     reject(result);
                     return;
                 }
-                const ingredientId = rows[0].ingredient_id;
+                console.log("here");
+                console.log(rows[0].recipe_id);
+                const recipeId = rows[0].recipe_id;
                 const checkData = {
-                    user_id: pantryAddData.user_id,
-                    ingredient_id: ingredientId,
+                    user_id: favoriteDeleteData.user_id,
+                    recipe_id: recipeId,
                 };
 
-                checkPantryExist(checkData).then((checkResult) => {
-                    if (checkResult.alreadyAdded === false) {
+                checkFavoriteExist(checkData).then((checkResult) => {
+                    if (checkResult.alreadyAdded === true) {
                         db.query(
-                            "INSERT INTO user_ingredient SET ?",
-                            checkData,
+                            "DELETE FROM user_recipe WHERE user_id = ? and recipe_id = ?",
+                            [checkData.user_id, checkData.recipe_id],
                             function (err, rows) {
                                 // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
                                 if (err) {
                                     console.log(err);
-                                    result.status = "加入失敗。";
+                                    result.success = false;
+                                    result.status = "刪除失敗。";
                                     result.err = "伺服器錯誤，請稍後在試！";
                                     reject(result);
                                     return;
                                 }
                                 // 若寫入資料庫成功，則回傳給clinet端下：
-                                result.status = "加入成功。";
+                                result.success = true;
+                                result.status = "刪除成功。";
                                 resolve(result);
                             }
                         );
                     } else {
-                        result.status = "加入失敗。";
-                        result.err = "此材料先前已加入資料庫！";
+                        result.status = "刪除失敗。";
+                        result.success = false;
+                        result.err = "此recipe不存放於favorite page中！";
                         reject(result);
                         return;
                     }
                 });
-
-               
             }
         );
     });
 };
-

@@ -10,6 +10,7 @@ var memberRouter = require("./routes/member");
 var recipeRouter = require("./routes/recipe");
 var ingredientRouter = require("./routes/ingredient");
 var pantryRouter = require("./routes/pantry");
+var favoriteRouter = require("./routes/favorite");
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use("/", memberRouter);
 app.use("/recipe/", recipeRouter);
 app.use("/ingredient/", ingredientRouter);
 app.use("/pantry/", pantryRouter);
+app.use("/favorite/", favoriteRouter);
 
 // app.use('/users', usersRouter);
 

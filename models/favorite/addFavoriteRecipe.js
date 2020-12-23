@@ -1,12 +1,13 @@
 const db = require("../connection_db");
-const checkPantryExist = require("./checkPantryExist");
+const checkFavoriteExist = require("./checkFavoriteExist");
 
-module.exports = function addIngredientToPantry(pantryAddData) {
+module.exports = function addIngredientToPantry(favoriteAddData) {
     let result = {};
     return new Promise((resolve, reject) => {
+        // 尋找是否有重複的email
         db.query(
-            "SELECT ingredient_id FROM ingredient WHERE ingredient_name = ?",
-            [pantryAddData.ingredient_name],
+            "SELECT * FROM recipe WHERE recipe_id = ?",
+            [favoriteAddData.recipe_id],
             function (err, rows) {
                 // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
                 if (err) {
@@ -20,20 +21,20 @@ module.exports = function addIngredientToPantry(pantryAddData) {
                 if (rows.length == 0) {
                     result.status = "加入失敗。";
                     result.err =
-                        "此材料不存在於資料庫中，請從下拉選單中選取最接近的材料！";
+                        "此食譜不存在於資料庫中，請按照搜尋結果加入！";
                     reject(result);
                     return;
                 }
-                const ingredientId = rows[0].ingredient_id;
+                
                 const checkData = {
-                    user_id: pantryAddData.user_id,
-                    ingredient_id: ingredientId,
-                };
+                    user_id: favoriteAddData.user_id,
+                    recipe_id: favoriteAddData.recipe_id
+                }
 
-                checkPantryExist(checkData).then((checkResult) => {
+                checkFavoriteExist(checkData).then((checkResult) => {
                     if (checkResult.alreadyAdded === false) {
                         db.query(
-                            "INSERT INTO user_ingredient SET ?",
+                            "INSERT INTO user_recipe SET ?",
                             checkData,
                             function (err, rows) {
                                 // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
@@ -51,7 +52,7 @@ module.exports = function addIngredientToPantry(pantryAddData) {
                         );
                     } else {
                         result.status = "加入失敗。";
-                        result.err = "此材料先前已加入資料庫！";
+                        result.err = "此recipe先前已加入資料庫！";
                         reject(result);
                         return;
                     }
