@@ -10,8 +10,10 @@ module.exports = function verifyToken(token) {
         
         if (token) {
             jwt.verify(token, config.secret, function (err, decoded) {
+                console.log("-------verification_model------------");
                 console.log("ver");
                 console.log(decoded);
+                console.log("-------verification_model------------");
                 if (err) {
                     tokenResult = false;
                     resolve(tokenResult);
@@ -26,6 +28,7 @@ module.exports = function verifyToken(token) {
                     tokenResult = decoded.data;
                     console.log("lala");
                     console.log(tokenResult);
+                    console.log("-------verification_model------------");
                     resolve(tokenResult);
                 }
             });

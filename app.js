@@ -8,7 +8,8 @@ var logger = require("morgan");
 var usersRouter = require("./routes/users");
 var memberRouter = require("./routes/member");
 var recipeRouter = require("./routes/recipe");
-var ingredientRouter = require("./routes/ingredient")
+var ingredientRouter = require("./routes/ingredient");
+var pantryRouter = require("./routes/pantry");
 
 var app = express();
 
@@ -24,8 +25,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use('/', indexRouter);
 app.use("/", memberRouter);
-app.use("/recipe/", recipeRouter)
-app.use("/ingredient/", ingredientRouter)
+app.use("/recipe/", recipeRouter);
+app.use("/ingredient/", ingredientRouter);
+app.use("/pantry/", pantryRouter);
 
 // app.use('/users', usersRouter);
 

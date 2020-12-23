@@ -5,7 +5,7 @@ const config = require("../config/development_config");
 const getAllRecipes = require("../models/recipe/getAllRecipes");
 const getOneRecipe = require("../models/recipe/getOneRecipe");
 
-module.exports = class Member {
+module.exports = class Recipes {
     getAcquireAllRecipes(req, res, next) {
         // const returnFormat = {
         //     success: false,
@@ -20,8 +20,10 @@ module.exports = class Member {
             (result) => {
                 // 若寫入成功則回傳
                 res.json({
-                    success: true,
-                    recipes: result,
+                    result: {
+                        success: true,
+                        recipes: result,
+                    },
                 });
             },
             (err) => {
@@ -33,14 +35,14 @@ module.exports = class Member {
         );
     }
     getSpecificRecipe(req, res, next) {
-        const returnFormat = {
-            success: false,
-            recipe_id: "",
-            recipe_name: "",
-            image_url: "",
-            instruction: "",
-            ingredients: [""],
-        };
+        // const returnFormat = {
+        //     success: false,
+        //     recipe_id: "",
+        //     recipe_name: "",
+        //     image_url: "",
+        //     instruction: "",
+        //     ingredients: [""],
+        // };
         const queryData = {
             recipeId: req.params.recipeId,
         };
@@ -50,15 +52,19 @@ module.exports = class Member {
                 // 若寫入成功則回傳
                 console.log(result);
                 res.json({
-                    success: true,
-                    ...result,
+                    result: {
+                        success: true,
+                        ...result,
+                    },
                 });
             },
             (err) => {
                 // 若寫入失敗則回傳
                 res.json({
-                    success: false,
-                    err: err,
+                    result: {
+                        success: false,
+                        err: err,
+                    },
                 });
             }
         );

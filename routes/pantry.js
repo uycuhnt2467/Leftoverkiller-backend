@@ -1,25 +1,21 @@
 var express = require("express");
 var router = express.Router();
 
-// const RecipeModifyMethod = require("../controllers/recipe_controller");
+const PantryModifyMethod = require("../controllers/pantry_controller");
 
-// recipeModifyMethod = new RecipeModifyMethod();
+pantryModifyMethod = new PantryModifyMethod();
 
 
 
 // get personal pantry, , should verify*
-// router.post("/pantry", );
+router.get("/", pantryModifyMethod.getAcquireAllPantry);
 
-// add new one new ingreident, should verify*
-// router.post("/r", () => {
-//     return "a";
-// });
+// add new one new ingreident into pantry, should verify*
+router.post("/", pantryModifyMethod.postAddIngredient);
 
 
 // delete one specfic ingredient, should verify*
-// router.delete("/", () => {
-//     return "a";
-// });
+router.delete("/", pantryModifyMethod.deleteRemoveIngredient);
 
 
 module.exports = router;

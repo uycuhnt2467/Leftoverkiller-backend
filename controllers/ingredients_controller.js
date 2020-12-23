@@ -19,18 +19,19 @@ module.exports = class Ingredients {
         // };
         getAllIngredients().then(
             (result) => {
-                // 若寫入成功則回傳
-                console.log(result);
                 res.json({
-                    success: true,
-                    ingredients: result,
+                    result: {
+                        success: true,
+                        ingredients: result,
+                    },
                 });
             },
             (err) => {
-                // 若寫入失敗則回傳
                 res.json({
-                    success: false,
-                    err: err,
+                    result: {
+                        success: false,
+                        ...err,
+                    },
                 });
             }
         );
@@ -46,25 +47,24 @@ module.exports = class Ingredients {
         //     // recipe_id, recipe_name, image_url
         //     // },
         // };
-        
+
         const queryData = {
-            ingredient_id: req.body.ingredient_id,
+            ingredient_id: req.params.ingredient_id,
         };
 
         getOneIngredient(queryData).then(
             (result) => {
-                // 若寫入成功則回傳
-                console.log(result);
                 res.json({
-                    success: true,
-                    ...result,
+                    result: {
+                        ...result,
+                    },
                 });
             },
             (err) => {
-                // 若寫入失敗則回傳
                 res.json({
-                    success: false,
-                    err: err,
+                    result: {
+                        ...err,
+                    },
                 });
             }
         );
