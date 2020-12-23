@@ -4,7 +4,7 @@ const config = require("../config/development_config");
 const Check = require("../service/member_check");
 
 const verify = require("../models/member/verification_model");
-const addIngredient = require("../models/pantry/addingredient_model");
+const addIngredient = require("../models/pantry/addIngredient_model");
 const getAllPantry = require("../models/pantry/getAllPantry");
 const deleteIngredientFromPantry = require("../models/pantry/deleteIngredientFromPantry");
 
