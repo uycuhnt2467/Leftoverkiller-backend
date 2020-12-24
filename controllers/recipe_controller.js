@@ -29,7 +29,11 @@ module.exports = class Recipes {
             (err) => {
                 // 若寫入失敗則回傳
                 res.json({
-                    err: err,
+                    result: {
+                        err: err,
+                        success:false
+                    }
+                    
                 });
             }
         );

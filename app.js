@@ -12,6 +12,7 @@ var ingredientRouter = require("./routes/ingredient");
 var pantryRouter = require("./routes/pantry");
 var favoriteRouter = require("./routes/favorite");
 var checkLogRouter = require("./routes/checkLog");
+var searchRouter = require("./routes/search")
 
 var app = express();
 
@@ -31,7 +32,8 @@ app.use("/recipe/", recipeRouter);
 app.use("/ingredient/", ingredientRouter);
 app.use("/pantry/", pantryRouter);
 app.use("/favorite/", favoriteRouter);
-app.use("/checkLog", checkLogRouter);
+app.use("/checkLog/", checkLogRouter);
+app.use("/search/", searchRouter)
 
 // app.use('/users', usersRouter);
 
@@ -51,6 +53,6 @@ app.use(function (err, req, res, next) {
     res.render("error");
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// app.listen(3000, () => console.log("Server running on port 3000"));
 
 module.exports = app;

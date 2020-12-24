@@ -13,8 +13,13 @@ module.exports = function getRecipes() {
                     reject(result);
                     return;
                 }
-                
-                resolve(rows);
+                result = rows.map((val) => ({
+                    recipe_id: val.recipe_id,
+                    recipe_name: val.recipe_name,
+                    image_url: val.imageURL,
+                }));
+                result.success = true;
+                resolve(result);
             }
         );
     });
