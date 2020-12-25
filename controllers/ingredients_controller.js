@@ -4,6 +4,7 @@ const config = require("../config/development_config");
 
 const getAllIngredients = require("../models/ingredient/getAllIngredients");
 const getOneIngredient = require("../models/ingredient/getOneIngredient");
+const getOneIngredientByName = require("../models/ingredient/getOneIngredientByName")
 
 module.exports = class Ingredients {
     // get_ingredients.php
@@ -69,4 +70,29 @@ module.exports = class Ingredients {
             }
         );
     }
+
+    postSpecificIngredientByName(req, res, next) {
+        // console.log(req.body);
+        const queryData = {
+            ingredient_name: req.body.ingredient_name,
+        };
+
+        getOneIngredientByName(queryData).then(
+            (result) => {
+                res.json({
+                    result: {
+                        ...result,
+                    },
+                });
+            },
+            (err) => {
+                res.json({
+                    result: {
+                        ...err,
+                    },
+                });
+            }
+        );
+    }
+
 };

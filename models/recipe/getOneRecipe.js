@@ -6,7 +6,7 @@ module.exports = function getOneRecipe(queryData) {
         // 找尋
         db.query(
             "SELECT * FROM recipe WHERE recipe_id = ?",
-            [queryData.recipeId],
+            [queryData.recipe_id],
             function (err, rows) {
                 if (err) {
                     result.status = "搜尋失敗。";

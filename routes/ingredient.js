@@ -9,4 +9,6 @@ router.get("/", ingredientsModifyMethod.getAcquireAllIngredients);
 
 router.get("/:ingredient_id", ingredientsModifyMethod.getSpecificIngredient);
 
+router.post("/name", ingredientsModifyMethod.postSpecificIngredientByName);
+
 module.exports = router;

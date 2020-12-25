@@ -9,7 +9,10 @@ recipeModifyMethod = new RecipeModifyMethod();
 router.get("/", recipeModifyMethod.getAcquireAllRecipes);
 
 // retun one specfic recipes
-router.get("/:recipeId", recipeModifyMethod.getSpecificRecipe);
+router.get("/:recipe_id", recipeModifyMethod.getSpecificRecipe);
+
+// get recipe by recipe_name
+router.post("/name", recipeModifyMethod.postSpecificRecipe)
 
 // add new one specfic recipes, administrator only *
 // router.post("/r", () => {
