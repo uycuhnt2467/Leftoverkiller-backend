@@ -9,7 +9,10 @@ pantryModifyMethod = new PantryModifyMethod();
 router.get("/", pantryModifyMethod.getAcquireAllPantry);
 
 // add new one new ingreident into pantry, should verify*
-router.post("/", pantryModifyMethod.postAddIngredient);
+router.post("/", pantryModifyMethod.postAddIngredientByName);
+
+// add new one new ingreident into pantry, should verify*
+router.post("/id", pantryModifyMethod.postAddIngredientByID);
 
 // delete one specfic ingredient, should verify*
 router.delete("/", pantryModifyMethod.deleteRemoveIngredient);
