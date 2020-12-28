@@ -25,7 +25,7 @@ module.exports = function getOneRecipe(queryData) {
 
         db.query(
             "SELECT * FROM ingredient WHERE ingredient_id IN (SELECT ingredient_id FROM recipe_ingredient WHERE recipe_id = ?)",
-            [queryData.recipeId],
+            [queryData.recipe_id],
             function (err, rows) {
                 // console.log(rows);
                 if (err) {
