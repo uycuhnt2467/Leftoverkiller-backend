@@ -1,6 +1,6 @@
 # Leftoverkiller_nodejs
 
-This backend script is intialized according to https://ithelp.ithome.com.tw/articles/10195845.
+This backend script is intialized according to https://ithelp.ithome.com.tw/articles/10195845 and revised according to my previous course project (LeftoverKiller, https://github.com/narayana1101/leftover_killer).
 The current server is deployed on AWS EC2, and is run by pm2 package. (http://3.12.253.9:3000/)
 
 The server is mainly built up by utilizing Express.js, and respond to frontend application by returning recipe, ingredient, and user account information which is stored in MySQL. Thus, if you want to install this script in your own server, please don't forget to create one database.
