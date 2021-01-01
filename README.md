@@ -44,3 +44,15 @@ The current version offers the following routes and the routes are mainly built 
       <li> /search POST (should contain ingredient information)
     </ul>
 </ol>
+
+
+INSTALL:
+<ol>
+   <li> git clone https://github.com/uycuhnt2467/Leftoverkiller_nodejs.git
+   <li> cd LeftoverKiller_nodejs
+   <li> npm install --save
+</ol>
+RUN:
+<ol>
+   <li> node app.js (or use pm2 to run it)
+</ol>
