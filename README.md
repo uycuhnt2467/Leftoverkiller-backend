@@ -7,7 +7,7 @@ The server is mainly built up by utilizing Express.js, and respond to frontend a
 
 The current version offers the following routes and the routes are mainly built up following RESTful api:
 <ol>
-   <li>Favorite: The routes are <b>only work for member who had logged in </b>.d,  and . 
+   <li>Favorite: The routes are <b>only work for member who had logged in </b>. 
     <ul>
       <li> /favorite GET: Members can get their favorite recor </li>
       <li> /favorite POST (should contain recipe id): Members can add new recipe into their favorite record </li>
