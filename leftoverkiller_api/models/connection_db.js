@@ -11,6 +11,7 @@ const connection = mysqlt.createConnection({
 
 connection.connect(err => {
   if (err) {
+    console.log(err.message)
     console.log('connecting error');
   } else {
     console.log('connecting success');
