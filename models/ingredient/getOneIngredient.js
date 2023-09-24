@@ -37,6 +37,8 @@ module.exports = function getOneIngredient(queryData) {
             "SELECT recipe.recipe_id, recipe.popularity, recipe.imageURL, recipe.recipe_name, recipe_ingredient.ingredient_id FROM recipe INNER JOIN recipe_ingredient ON recipe.recipe_id = recipe_ingredient.recipe_id WHERE ingredient_id = (?) ORDER BY popularity DESC",
             [queryData.ingredient_id],
             function (err, rows) {
+                console.log("ingredient");
+                console.log(rows);
                 if (err) {
                     result.success = false;
                     result.status = "搜尋食譜排名失敗。";

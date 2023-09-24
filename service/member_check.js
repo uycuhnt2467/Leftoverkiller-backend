@@ -7,7 +7,9 @@ module.exports = class CheckCustomer {
     }
 
     checkNull(data) {
-        for (var key in data) {
+        console.log("check")
+        console.log(data)
+        for (let key in data) {
             // 不為空
             return false;
         }

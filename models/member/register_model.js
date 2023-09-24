@@ -4,7 +4,7 @@ module.exports = function register(memberData) {
     let result = {};
     return new Promise((resolve, reject) => {
         // 尋找是否有重複的email
-        db.query('SELECT email FROM account WHERE email = ?', memberData.email, function (err, rows) {
+        db.query('SELECT email FROM accounts WHERE email = ?', memberData.email, function (err, rows) {
             // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
             if (err) {
                 console.log(err);
@@ -20,7 +20,7 @@ module.exports = function register(memberData) {
                 reject(result);
             } else {
                 // 將資料寫入資料庫
-                db.query('INSERT INTO account SET ?', memberData, function (err, rows) {
+                db.query('INSERT INTO accounts SET ?', memberData, function (err, rows) {
                     // 若資料庫部分出現問題，則回傳給client端「伺服器錯誤，請稍後再試！」的結果。
                     if (err) {
                         console.log(err);

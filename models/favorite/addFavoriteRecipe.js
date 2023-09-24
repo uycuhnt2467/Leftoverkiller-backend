@@ -4,7 +4,7 @@ const checkFavoriteExist = require("./checkFavoriteExist");
 module.exports = function addIngredientToPantry(favoriteAddData) {
     let result = {};
     return new Promise((resolve, reject) => {
-        // 尋找是否有重複的email
+        console.log("herrr")
         db.query(
             "SELECT * FROM recipe WHERE recipe_id = ?",
             [favoriteAddData.recipe_id],
@@ -30,6 +30,7 @@ module.exports = function addIngredientToPantry(favoriteAddData) {
                     user_id: favoriteAddData.user_id,
                     recipe_id: favoriteAddData.recipe_id
                 }
+                console.log(checkData)
 
                 checkFavoriteExist(checkData).then((checkResult) => {
                     if (checkResult.alreadyAdded === false) {
@@ -57,8 +58,6 @@ module.exports = function addIngredientToPantry(favoriteAddData) {
                         return;
                     }
                 });
-
-               
             }
         );
     });

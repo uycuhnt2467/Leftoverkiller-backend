@@ -18,10 +18,10 @@ module.exports = class Member {
 
         // 獲取client端資料
         const memberData = {
-            username: req.body.username,
+            user_name: req.body.username,
             email: req.body.email,
             hash_password: password,
-            nickname: req.body.nickname,
+            nick_name: req.body.nickname,
         };
         const checkEmail = check.checkEmail(memberData.email);
         // 不符合email格式
@@ -57,13 +57,15 @@ module.exports = class Member {
 
         // 獲取client端資料
         const memberData = {
-            username: req.body.username,
+            user_name: req.body.username,
             hash_password: password,
+            nick_name: "???"
         };
-
+        console.log("produce lala")
         loginAction(memberData)
             .then((rows) => {
                 if (check.checkNull(rows) === true) {
+                    console.log("is false");;
                     res.json({
                         result: {
                             status: "登入失敗。",
@@ -72,7 +74,7 @@ module.exports = class Member {
                     });
                 } else if (check.checkNull(rows) === false) {
                     // 產生token
-
+                    console.log("produce token")
                     const token = jwt.sign(
                         {
                             algorithm: "HS256",
@@ -123,7 +125,7 @@ module.exports = class Member {
                         const password = encryption(req.body.hash_password);
 
                         const memberUpdateData = {
-                            username: req.body.username,
+                            user_name: req.body.username,
                             hash_password: password,
                             // update_date: onTime(),
                         };
