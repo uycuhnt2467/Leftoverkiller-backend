@@ -3,7 +3,7 @@ var router = express.Router();
 
 const FavoriteModifyMethod = require("../controllers/favorite_controller");
 
-favoriteModifyMethod = new FavoriteModifyMethod();
+let favoriteModifyMethod = new FavoriteModifyMethod();
 
 // get personal favorite recipe, , should verify*
 router.get("/", favoriteModifyMethod.getAcquireAllFavorite);

@@ -3,7 +3,7 @@ var router = express.Router();
 
 const PantryModifyMethod = require("../controllers/pantry_controller");
 
-pantryModifyMethod = new PantryModifyMethod();
+let pantryModifyMethod = new PantryModifyMethod();
 
 // get personal pantry, , should verify*
 router.get("/", pantryModifyMethod.getAcquireAllPantry);

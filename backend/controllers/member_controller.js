@@ -9,7 +9,7 @@ const loginAction = require("../models/member/login_model");
 const verify = require("../models/member/verification_model");
 const updateAction = require("../models/member/update_model");
 
-check = new Check();
+let check = new Check();
 
 module.exports = class Member {
     postRegister(req, res, next) {

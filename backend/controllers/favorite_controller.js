@@ -6,7 +6,7 @@ const addFavoriteRecipe = require("../models/favorite/addFavoriteRecipe");
 const getAllFavoriteRecipe = require("../models/favorite/getAllFavoriteRecipe");
 const deleteRecipeFromFavorite = require("../models/favorite/deleteRecipeFromFavorite")
 
-check = new Check();
+let check = new Check();
 
 module.exports = class Favorite {
     getAcquireAllFavorite(req, res, next) {

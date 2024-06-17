@@ -1,7 +1,3 @@
-const jwt = require("jsonwebtoken");
-
-const config = require("../config/development_config");
-
 const getAllRecipes = require("../models/recipe/getAllRecipes");
 const getOneRecipe = require("../models/recipe/getOneRecipe");
 const getOneRecipeByName = require("../models/recipe/getOneRecipeByName")

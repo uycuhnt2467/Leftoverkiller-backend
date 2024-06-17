@@ -1,5 +1,4 @@
 const db = require("../connection_db");
-const checkPantryExist = require("./checkPantryExist");
 
 module.exports = function getDataFromPantry(pantryGetData) {
     let result = {};

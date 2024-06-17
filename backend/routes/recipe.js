@@ -3,7 +3,7 @@ var router = express.Router();
 
 const RecipeModifyMethod = require("../controllers/recipe_controller");
 
-recipeModifyMethod = new RecipeModifyMethod();
+let recipeModifyMethod = new RecipeModifyMethod();
 
 // return all recipes
 router.get("/", recipeModifyMethod.getAcquireAllRecipes);

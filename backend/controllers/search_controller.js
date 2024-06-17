@@ -1,7 +1,3 @@
-const jwt = require("jsonwebtoken");
-
-const config = require("../config/development_config");
-
 const searchRecipe = require("../models/search/searchRecipe");
 
 module.exports = class Search {

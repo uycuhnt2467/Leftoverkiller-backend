@@ -1,6 +1,3 @@
-const jwt = require("jsonwebtoken");
-
-const config = require("../config/development_config");
 const Check = require("../service/member_check");
 
 const verify = require("../models/member/verification_model");
@@ -9,7 +6,7 @@ const addIngredientByID = require("../models/pantry/addIngredientByID")
 const getAllPantry = require("../models/pantry/getAllPantry");
 const deleteIngredientFromPantry = require("../models/pantry/deleteIngredientFromPantry");
 
-check = new Check();
+let check = new Check();
 
 module.exports = class Pantry {
     postAddIngredientByName(req, res, next) {
