@@ -6,7 +6,7 @@ var logger = require("morgan");
 var cors = require("cors")
 
 // var indexRouter = require('./routes/index');
-var usersRouter = require("./routes/users");
+// var usersRouter = require("./routes/users");
 var memberRouter = require("./routes/member");
 var recipeRouter = require("./routes/recipe");
 var ingredientRouter = require("./routes/ingredient");
@@ -15,7 +15,7 @@ var favoriteRouter = require("./routes/favorite");
 var checkLogRouter = require("./routes/checkLog");
 var searchRouter = require("./routes/search")
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -27,6 +27,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors())
+const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200,
+  }
+app.use(cors(corsOptions));
 app.options("*", cors())
 
 // app.use('/', indexRouter);
@@ -56,6 +61,7 @@ app.use(function (err, req, res, next) {
     res.render("error");
 });
 
+// app.listen(3001, "127.0.0.1", () => console.log("Server running on port 3001"));
 app.listen(3001, () => console.log("Server running on port 3001"));
 
 module.exports = app;
