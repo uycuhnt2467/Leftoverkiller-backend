@@ -1,7 +1,7 @@
 // get_ingredient_id
-const db = require("../connection_db");
+import db from "../connection_db.js";
 
-module.exports = function searchRecipes(ingredientList) {
+export default function searchRecipes(ingredientList) {
     let result = {};
     let ingredients_id = [];
 

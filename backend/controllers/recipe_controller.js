@@ -1,12 +1,9 @@
-const jwt = require("jsonwebtoken");
+import getAllRecipes from '../models/recipe/getAllRecipes.js';
+import getOneRecipe from '../models/recipe/getOneRecipe.js';
+import getOneRecipeByName from '../models/recipe/getOneRecipeByName.js';
 
-const config = require("../config/development_config");
 
-const getAllRecipes = require("../models/recipe/getAllRecipes");
-const getOneRecipe = require("../models/recipe/getOneRecipe");
-const getOneRecipeByName = require("../models/recipe/getOneRecipeByName")
-
-module.exports = class Recipes {
+export default class Recipes {
     getAcquireAllRecipes(req, res, next) {
         // const returnFormat = {
         //     success: false,

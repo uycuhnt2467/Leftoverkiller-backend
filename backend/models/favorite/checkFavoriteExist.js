@@ -1,6 +1,6 @@
-const db = require("../connection_db");
+import db from "../connection_db.js";
 
-module.exports = function checkFavoriteExist(QueryData) {
+export default function checkFavoriteExist(QueryData) {
     const result = {};
     return new Promise((resolve, reject) => {
         db.query(

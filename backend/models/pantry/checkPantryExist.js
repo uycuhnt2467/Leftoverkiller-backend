@@ -1,6 +1,6 @@
-const db = require("../connection_db");
+import db from "../connection_db.js";
 
-module.exports = function checkPantryExist(QueryData) {
+export default function checkPantryExist(QueryData) {
     const result = {};
     return new Promise((resolve, reject) => {
         db.query(

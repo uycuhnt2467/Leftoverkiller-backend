@@ -1,17 +1,17 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-const config = require("../config/development_config");
-const Check = require("../service/member_check");
+import config from "../config/development_config.js";
+import Check from "../service/member_check.js";
 
-const toRegister = require("../models/member/register_model");
-const encryption = require("../models/member/encryption_model");
-const loginAction = require("../models/member/login_model");
-const verify = require("../models/member/verification_model");
-const updateAction = require("../models/member/update_model");
+import toRegister from "../models/member/register_model.js";
+import encryption from "../models/member/encryption_model.js";
+import loginAction from "../models/member/login_model.js";
+import verify from "../models/member/verification_model.js";
+import updateAction from "../models/member/update_model.js";
 
-check = new Check();
+const check = new Check();
 
-module.exports = class Member {
+export default class Member {
     postRegister(req, res, next) {
         // 進行加密
         const password = encryption(req.body.hash_password);
@@ -61,11 +61,9 @@ module.exports = class Member {
             hash_password: password,
             nick_name: "???"
         };
-        console.log("produce lala")
         loginAction(memberData)
             .then((rows) => {
                 if (check.checkNull(rows) === true) {
-                    console.log("is false");;
                     res.json({
                         result: {
                             status: "登入失敗。",
@@ -74,7 +72,6 @@ module.exports = class Member {
                     });
                 } else if (check.checkNull(rows) === false) {
                     // 產生token
-                    console.log("produce token")
                     const token = jwt.sign(
                         {
                             algorithm: "HS256",

@@ -1,12 +1,8 @@
-const jwt = require("jsonwebtoken");
+import getAllIngredients from '../models/ingredient/getAllIngredients.js';
+import getOneIngredient from '../models/ingredient/getOneIngredient.js';
+import getOneIngredientByName from '../models/ingredient/getOneIngredientByName.js';
 
-const config = require("../config/development_config");
-
-const getAllIngredients = require("../models/ingredient/getAllIngredients");
-const getOneIngredient = require("../models/ingredient/getOneIngredient");
-const getOneIngredientByName = require("../models/ingredient/getOneIngredientByName")
-
-module.exports = class Ingredients {
+export default class Ingredients {
     // get_ingredients.php
     getAcquireAllIngredients(req, res, next) {
         // const returnFormat = {

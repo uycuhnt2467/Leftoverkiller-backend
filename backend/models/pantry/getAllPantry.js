@@ -1,7 +1,6 @@
-const db = require("../connection_db");
-const checkPantryExist = require("./checkPantryExist");
+import db from "../connection_db.js";
 
-module.exports = function getDataFromPantry(pantryGetData) {
+export default function getDataFromPantry(pantryGetData) {
     let result = {};
     return new Promise((resolve, reject) => {
         // 尋找是否有重複的email

@@ -1,10 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const SearchModifyMethod = require("../controllers/search_controller");;
-searchModifyMethod = new SearchModifyMethod();
-
+import SearchModifyMethod from "../controllers/search_controller.js";;
+const searchModifyMethod = new SearchModifyMethod();
 
 router.post("/", searchModifyMethod.postSearchByIngredient);
 
-module.exports = router;
+export default router;

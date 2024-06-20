@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken");
-const config = require("../../config/development_config");
+import jwt from 'jsonwebtoken';
+import config from '../../config/development_config.js';
 
 //進行token認證
-module.exports = function verifyToken(token) {
+export default function verifyToken(token) {
     let tokenResult = "";
     const time = Math.floor(Date.now() / 1000);
     return new Promise((resolve, reject) => {

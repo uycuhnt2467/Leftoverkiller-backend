@@ -1,5 +1,4 @@
-module.exports = class CheckCustomer {
-    //判斷email格式
+export default class CheckCustomer {
     checkEmail(email) {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const result = re.test(email);
@@ -7,13 +6,9 @@ module.exports = class CheckCustomer {
     }
 
     checkNull(data) {
-        console.log("check")
-        console.log(data)
         for (let key in data) {
-            // 不為空
             return false;
         }
-        // 為空值
         return true;
     }
 };

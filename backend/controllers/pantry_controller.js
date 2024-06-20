@@ -1,17 +1,15 @@
-const jwt = require("jsonwebtoken");
+import Check from '../service/member_check.js';
 
-const config = require("../config/development_config");
-const Check = require("../service/member_check");
+import verify from '../models/member/verification_model.js';
+import addIngredient from '../models/pantry/addIngredient_model.js';
+import addIngredientByID from '../models/pantry/addIngredientByID.js';
+import getAllPantry from '../models/pantry/getAllPantry.js';
+import deleteIngredientFromPantry from '../models/pantry/deleteIngredientFromPantry.js';
 
-const verify = require("../models/member/verification_model");
-const addIngredient = require("../models/pantry/addIngredient_model");
-const addIngredientByID = require("../models/pantry/addIngredientByID")
-const getAllPantry = require("../models/pantry/getAllPantry");
-const deleteIngredientFromPantry = require("../models/pantry/deleteIngredientFromPantry");
 
-check = new Check();
+const check = new Check();
 
-module.exports = class Pantry {
+export default class Pantry {
     postAddIngredientByName(req, res, next) {
         const token = req.headers["token"];
         if (check.checkNull(token) === true) {

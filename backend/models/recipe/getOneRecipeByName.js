@@ -1,6 +1,6 @@
-const db = require("../connection_db");
+import db from '../connection_db.js';
 
-module.exports = function getOneRecipe(queryData) {
+export default function getOneRecipe(queryData) {
     let result = {};
     return new Promise((resolve, reject) => {
         // 找尋

@@ -1,12 +1,11 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const LogModifyMethod = require("../controllers/log_controller.js");
+import LogModifyMethod from "../controllers/log_controller.js";
 
-logModifyMethod = new LogModifyMethod();
+const logModifyMethod = new LogModifyMethod();
 
 // get personal favorite recipe, , should verify*
 router.get("/", logModifyMethod.getCheckLog);
 
-
-module.exports = router;
+export default router;

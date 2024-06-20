@@ -1,7 +1,7 @@
-const db = require("../connection_db");
-const checkPantryExist = require("./checkPantryExist");
+import db from "../connection_db.js";
+import checkPantryExist from "./checkPantryExist.js";
 
-module.exports = function addIngredientToPantry(pantryAddData) {
+export default function addIngredientToPantry(pantryAddData) {
     let result = {};
     return new Promise((resolve, reject) => {
         checkPantryExist(pantryAddData.ingredient_id).then((checkResult) => {

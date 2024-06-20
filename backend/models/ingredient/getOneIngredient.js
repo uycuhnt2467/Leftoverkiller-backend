@@ -1,6 +1,6 @@
-const db = require("../connection_db");
+import db from '../connection_db.js';
 
-module.exports = function getOneIngredient(queryData) {
+export default function getOneIngredient(queryData) {
     let result = {};
     return new Promise((resolve, reject) => {
         // 找尋

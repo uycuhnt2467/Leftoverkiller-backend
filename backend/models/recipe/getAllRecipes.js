@@ -1,6 +1,6 @@
-const db = require("../connection_db");
+import db from '../connection_db.js';
 
-module.exports = function getRecipes() {
+export default function getRecipes() {
     let result = {};
     return new Promise((resolve, reject) => {
         // 找尋

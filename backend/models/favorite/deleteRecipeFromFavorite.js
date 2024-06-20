@@ -1,7 +1,7 @@
-const db = require("../connection_db");
-const checkFavoriteExist = require("./checkFavoriteExist");
+import db from "../connection_db.js";
+import checkFavoriteExist from "./checkFavoriteExist.js";
 
-module.exports = function deleteRecipeFromFavorite(favoriteDeleteData) {
+export default function deleteRecipeFromFavorite(favoriteDeleteData) {
     let result = {};
     return new Promise((resolve, reject) => {
         db.query(

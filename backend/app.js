@@ -1,21 +1,24 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var cors = require("cors")
+import createError from "http-errors";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import cors from "cors";
+import { fileURLToPath } from 'url';
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require("./routes/users");
-var memberRouter = require("./routes/member");
-var recipeRouter = require("./routes/recipe");
-var ingredientRouter = require("./routes/ingredient");
-var pantryRouter = require("./routes/pantry");
-var favoriteRouter = require("./routes/favorite");
-var checkLogRouter = require("./routes/checkLog");
-var searchRouter = require("./routes/search")
+// import indexRouter from "./routes/index";
+// import usersRouter from "./routes/users";
+import memberRouter from "./routes/member.js";
+import recipeRouter from "./routes/recipe.js";
+import ingredientRouter from "./routes/ingredient.js";
+import pantryRouter from "./routes/pantry.js";
+import favoriteRouter from "./routes/favorite.js";
+import checkLogRouter from "./routes/checkLog.js";
+import searchRouter from "./routes/search.js";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -61,7 +64,7 @@ app.use(function (err, req, res, next) {
     res.render("error");
 });
 
-// app.listen(3001, "127.0.0.1", () => console.log("Server running on port 3001"));
+// app.listen(3001, "127.0.0.1", () => console.log("Server running on host 127.0.0.1 port 3001"));
 app.listen(3001, () => console.log("Server running on port 3001"));
 
-module.exports = app;
+export default app;

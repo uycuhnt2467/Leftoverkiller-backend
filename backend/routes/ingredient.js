@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const IngredientsModifyMethod = require("../controllers/ingredients_controller");
+import IngredientsModifyMethod from "../controllers/ingredients_controller.js";
 
-ingredientsModifyMethod = new IngredientsModifyMethod();
+const ingredientsModifyMethod = new IngredientsModifyMethod();
 
 router.get("/", ingredientsModifyMethod.getAcquireAllIngredients);
 
@@ -11,4 +11,4 @@ router.get("/:ingredient_id", ingredientsModifyMethod.getSpecificIngredient);
 
 router.post("/name", ingredientsModifyMethod.postSpecificIngredientByName);
 
-module.exports = router;
+export default router;
