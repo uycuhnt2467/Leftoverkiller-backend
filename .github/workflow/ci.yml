@@ -1,0 +1,41 @@
+name: CI for Node.js Express with MySQL
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build Docker images
+      run: docker-compose build
+
+    - name: Start Docker containers
+      run: docker-compose up -d
+
+    # - name: Wait for MySQL to be ready
+    #   run: docker-compose exec db sh -c 'until mysql -h"127.0.0.1" -uroot -proot -e "show databases"; do sleep 1; done'
+
+    - name: Run tests
+      run: npm test
+
+    - name: Stop Docker containers
+      run: docker-compose down
