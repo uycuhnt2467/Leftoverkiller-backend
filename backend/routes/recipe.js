@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const RecipeModifyMethod = require("../controllers/recipe_controller");
+import RecipeModifyMethod from '../controllers/recipe_controller.js';
 
-recipeModifyMethod = new RecipeModifyMethod();
+const recipeModifyMethod = new RecipeModifyMethod();
 
 // return all recipes
 router.get("/", recipeModifyMethod.getAcquireAllRecipes);
@@ -32,4 +32,4 @@ router.post("/name", recipeModifyMethod.postSpecificRecipe)
 // router.post("/login", memberModifyMethod.postLogin);
 // router.put("/update", memberModifyMethod.putUpdate);
 
-module.exports = router;
+export default router;

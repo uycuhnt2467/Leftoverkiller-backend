@@ -1,6 +1,6 @@
-const db = require("../connection_db");
+import db from '../connection_db.js';
 
-module.exports = function memberLogin(memberData) {
+export default function memberLogin(memberData) {
     let result = {};
     return new Promise((resolve, reject) => {
         // 找尋

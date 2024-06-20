@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const MemberModifyMethod = require("../controllers/member_controller");
+import MemberModifyMethod from "../controllers/member_controller.js";
 
-memberModifyMethod = new MemberModifyMethod();
+const memberModifyMethod = new MemberModifyMethod();
 
 router.post("/register", memberModifyMethod.postRegister);
 
@@ -11,4 +11,4 @@ router.post("/login", memberModifyMethod.postLogin);
 
 router.put("/update", memberModifyMethod.putUpdate);
 
-module.exports = router;
+export default router;

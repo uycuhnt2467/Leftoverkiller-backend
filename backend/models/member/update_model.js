@@ -1,6 +1,6 @@
-const db = require('../connection_db');
+import db from '../connection_db.js';
 
-module.exports = function customerEdit(id, memberUpdateData) {
+export default function customerEdit(id, memberUpdateData) {
     let result = {};
     return new Promise((resolve, reject) => {
         db.query('UPDATE accounts SET ? WHERE user_id = ?', [memberUpdateData, id], function (err, rows) {

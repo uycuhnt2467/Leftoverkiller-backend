@@ -1,6 +1,6 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
-module.exports = function getRePassword(password) {
+export default function getRePassword(password) {
     //加密
     let hashPassword = crypto.createHash('sha1');
     hashPassword.update(password);

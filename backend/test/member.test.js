@@ -1,12 +1,28 @@
-const http = require('http');
-const request = require('supertest');
-const app = require('../app');
-
-
-
+// const http = require('http');
+import request from 'supertest';
+import app from '../app.js';
+// const { expect } = require('chai');
+import {expect} from 'chai';
+import db from "../models/connection_db.js";
 
 let valid_username = "testuser@gmail.com";
 let valid_password = "testpass1234";
+
+before(async () => {
+    // Clean up the test user
+    db.execute('DELETE FROM accounts WHERE user_name = ?', [valid_username]);
+    // Close the connection
+});
+
+after(async () => {
+    // Clean up the test user
+    db.execute('DELETE FROM accounts WHERE user_name = ?', [valid_username]);
+    // Close the connection
+    db.end();
+});
+
+
+
 
 describe('Member API Endpoints', () => {
     it('should create new member', done => {
@@ -16,7 +32,21 @@ describe('Member API Endpoints', () => {
             .expect(200)
             .end((err, res) => {
                 if (err) return done(err);
-                console.log(res)
+                expect(res.body).to.have.property('result');
+                const result = res.body.result;
+                // Check the specific values
+                expect(result).to.include({
+                    status: '註冊成功。',
+                });
+
+                expect(result.registerMember).to.include({
+                    user_name: valid_username,
+                    email: valid_username,
+                });
+
+                // Additional check for hash_password to ensure it exists and is a string
+                expect(result.registerMember).to.have.property('hash_password').that.is.a('string');
+
                 done();
             });
     });

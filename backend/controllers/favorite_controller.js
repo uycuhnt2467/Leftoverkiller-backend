@@ -1,14 +1,14 @@
-const Check = require("../service/member_check");
+import Check from "../service/member_check.js"
 
-const verify = require("../models/member/verification_model");
+import verify from "../models/member/verification_model.js"
 
-const addFavoriteRecipe = require("../models/favorite/addFavoriteRecipe");
-const getAllFavoriteRecipe = require("../models/favorite/getAllFavoriteRecipe");
-const deleteRecipeFromFavorite = require("../models/favorite/deleteRecipeFromFavorite")
+import addFavoriteRecipe from "../models/favorite/addFavoriteRecipe.js"
+import getAllFavoriteRecipe from "../models/favorite/getAllFavoriteRecipe.js"
+import deleteRecipeFromFavorite from "../models/favorite/deleteRecipeFromFavorite.js"
 
-check = new Check();
+const check = new Check();
 
-module.exports = class Favorite {
+export default class Favorite {
     getAcquireAllFavorite(req, res, next) {
         const token = req.headers["token"];
         if (check.checkNull(token) === true) {

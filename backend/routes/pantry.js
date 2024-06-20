@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const PantryModifyMethod = require("../controllers/pantry_controller");
+import PantryModifyMethod from "../controllers/pantry_controller.js";
 
-pantryModifyMethod = new PantryModifyMethod();
+const pantryModifyMethod = new PantryModifyMethod();
 
 // get personal pantry, , should verify*
 router.get("/", pantryModifyMethod.getAcquireAllPantry);
@@ -17,4 +17,4 @@ router.post("/id", pantryModifyMethod.postAddIngredientByID);
 // delete one specfic ingredient, should verify*
 router.delete("/", pantryModifyMethod.deleteRemoveIngredient);
 
-module.exports = router;
+export default router;

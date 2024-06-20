@@ -1,6 +1,6 @@
 // DataBase
-const config = require('../config/development_config');
-const mysqlt = require("mysql2");
+import config from '../config/development_config.js';
+import mysqlt from 'mysql2';
 
 const connection = mysqlt.createConnection({
   host: config.mysql.host,
@@ -19,4 +19,4 @@ connection.connect(err => {
   }
 });
 
-module.exports = connection;
+export default connection;

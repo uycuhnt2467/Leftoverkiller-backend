@@ -1,6 +1,6 @@
-const db = require('../connection_db');
+import db from '../connection_db.js';
 
-module.exports = function register(memberData) {
+export default function register(memberData) {
     let result = {};
     return new Promise((resolve, reject) => {
         // 尋找是否有重複的email

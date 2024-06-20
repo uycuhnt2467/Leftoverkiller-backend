@@ -1,9 +1,9 @@
-var express = require("express");
-var router = express.Router();
+import express from "express";
+const router = express.Router();
 
-const FavoriteModifyMethod = require("../controllers/favorite_controller");
+import FavoriteModifyMethod from "../controllers/favorite_controller.js";
 
-favoriteModifyMethod = new FavoriteModifyMethod();
+const favoriteModifyMethod = new FavoriteModifyMethod();
 
 // get personal favorite recipe, , should verify*
 router.get("/", favoriteModifyMethod.getAcquireAllFavorite);
@@ -14,4 +14,4 @@ router.post("/", favoriteModifyMethod.postAddFavorite);
 // delete one specfic ingredient, should verify*
 router.delete("/", favoriteModifyMethod.deleteRemoveFavorite);
 
-module.exports = router;
+export default router;

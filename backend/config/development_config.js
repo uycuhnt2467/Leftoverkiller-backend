@@ -1,6 +1,8 @@
-require("dotenv").config();
+import dotenv from "dotenv";
 
-module.exports = {
+dotenv.config();
+
+export default {
     mysql: {
         host: process.env.HOST,
         user: process.env.DATABASE_USER,

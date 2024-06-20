@@ -1,10 +1,6 @@
-const jwt = require("jsonwebtoken");
+import searchRecipe from "../models/search/searchRecipe.js";
 
-const config = require("../config/development_config");
-
-const searchRecipe = require("../models/search/searchRecipe");
-
-module.exports = class Search {
+export default class Search {
     postSearchByIngredient(req, res, next) {
         const ingredientList = req.body.ingredients;
         searchRecipe(ingredientList).then(
