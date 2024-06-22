@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 import { fileURLToPath } from 'url';
+import config from './config/development_config.js';
 
 // import indexRouter from "./routes/index";
 // import usersRouter from "./routes/users";
@@ -64,7 +65,8 @@ app.use(function (err, req, res, next) {
     res.render("error");
 });
 
-// app.listen(3001, "127.0.0.1", () => console.log("Server running on host 127.0.0.1 port 3001"));
-app.listen(3001, () => console.log("Server running on port 3001"));
+// app.listen(3003, "127.0.0.1", () => console.log("Server running on host 127.0.0.1 port 3001 ccc")); // local
+// app.listen(3001, "0.0.0.0", () => console.log("Server running on host 0.0.0.0 port 3001")); // docker
+app.listen(config.server.port, config.server.host, () => console.log(`Server running on host ${config.server.host}, port ${config.server.port}`))
 
 export default app;

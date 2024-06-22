@@ -11,8 +11,10 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    # ports:
-    #   - "3306:3306"
+      MYSQL_TCP_PORT: ${MYSQL_PORT}
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    command: --port=${MYSQL_PORT}
     volumes:
       - ./db/leftoverkiller_db.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
@@ -29,14 +31,14 @@ services:
       context: ./backend
       dockerfile: dockerfile
     env_file:
-      - .env
+      - ./.env
     ports:
       - "3001:3001"
     depends_on:
       mysql:
         condition: service_healthy
-    links:
-      - mysql:mysql
+    # links:
+    #   - mysql:mysql
     networks:
       - my-network
 
