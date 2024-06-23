@@ -35,9 +35,6 @@ jobs:
       id: get_container_id
       run: echo "container_id=$(docker ps -a | grep -E "leftoverkiller.*backend.*nodejs.*test" | awk '{print $1}')" >> $GITHUB_ENV
     
-    - name: Check npm test logs
-      run: docker logs ${{ env.container_id }}
-
     - name: Print container ID
       run: echo "Container ID is ${{ env.container_id }}"
     
@@ -46,6 +43,9 @@ jobs:
       run: |
         container_exit_code=$(docker wait ${{ env.container_id }})
         echo "container_exit_code=$container_exit_code" >> $GITHUB_ENV
+
+    - name: Check npm test logs
+      run: docker logs ${{ env.container_id }}
 
     - name: Check container exit code
       run: |
