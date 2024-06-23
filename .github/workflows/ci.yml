@@ -31,12 +31,12 @@ jobs:
     - name: Start Docker containers
       run: docker-compose -f docker-compose-test.yml up -d
 
-    - name: Check npm test logs
-      run: docker logs leftoverkiller-backend-nodejs_test-1
-
     - name: Get container ID
       id: get_container_id
       run: echo "container_id=$(docker ps -a | grep -E "leftoverkiller.*backend.*nodejs.*test" | awk '{print $1}')" >> $GITHUB_ENV
+    
+    - name: Check npm test logs
+      run: docker logs ${{ env.container_id }}
 
     - name: Print container ID
       run: echo "Container ID is ${{ env.container_id }}"
