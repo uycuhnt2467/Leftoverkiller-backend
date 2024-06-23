@@ -26,16 +26,35 @@ jobs:
     #   run: npm install
 
     - name: Build Docker images
-      run: docker-compose build
+      run: docker-compose -f docker-compose-test.yml build
 
     - name: Start Docker containers
-      run: docker-compose up -d
+      run: docker-compose -f docker-compose-test.yml up -d
 
-    # - name: Wait for MySQL to be ready
-    #   run: docker-compose exec db sh -c 'until mysql -h"127.0.0.1" -uroot -proot -e "show databases"; do sleep 1; done'
+    - name: Get container ID
+      id: get_container_id
+      run: echo "container_id=$(docker ps -a | grep -E "leftoverkiller.*backend.*nodejs.*test" | awk '{print $1}')" >> $GITHUB_ENV
+    
+    - name: Print container ID
+      run: echo "Container ID is ${{ env.container_id }}"
+    
+    - name: Wait for container to finish
+      id: wait_container
+      run: |
+        container_exit_code=$(docker wait ${{ env.container_id }})
+        echo "container_exit_code=$container_exit_code" >> $GITHUB_ENV
 
-    # - name: Run tests
-      # run: npm test
+    - name: Check npm test logs
+      run: docker logs ${{ env.container_id }}
+
+    - name: Check container exit code
+      run: |
+        if [ "${{ env.container_exit_code }}" -ne 0 ]; then
+          echo "Container exited with code ${{ env.container_exit_code }}"
+          exit 1
+        else
+          echo "Container exited with code ${{ env.container_exit_code }}: Success"
+        fi
 
     - name: Stop Docker containers
-      run: docker-compose down
+      run: docker-compose -f docker-compose-test.yml down
