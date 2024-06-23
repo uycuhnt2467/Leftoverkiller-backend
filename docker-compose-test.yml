@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  mysql:
+    # build: 
+    #   context: ./db
+    #   dockerfile: mysql.dockerfile
+    image: mysql:latest
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_TCP_PORT: ${MYSQL_PORT}
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    command: --port=${MYSQL_PORT}
+    volumes:
+      - ./db/leftoverkiller_db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - my-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysql -h 127.0.0.1 -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} -e 'show databases;'"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+  nodejs_test:
+    build: 
+      context: ./backend
+      dockerfile: dockerfile.test
+    env_file:
+      - ./.env
+    ports:
+      - "3001:3001"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    # links:
+    #   - mysql:mysql
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
