@@ -36,7 +36,7 @@ jobs:
 
     - name: Get container ID
       id: get_container_id
-      run: echo "container_id=$(docker ps -a | grep leftoverkiller-backend-nodejs | awk '{print $1}')" >> $GITHUB_ENV
+      run: echo "container_id=$(docker ps -a | grep -E "leftoverkiller.*backend.*nodejs.*test" | awk '{print $1}')" >> $GITHUB_ENV
 
     - name: Print container ID
       run: echo "Container ID is ${{ env.container_id }}"
