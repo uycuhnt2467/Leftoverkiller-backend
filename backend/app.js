@@ -6,6 +6,8 @@ import logger from "morgan";
 import cors from "cors";
 import { fileURLToPath } from 'url';
 import config from './config/development_config.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swaggerConfig.js';
 
 // import indexRouter from "./routes/index";
 // import usersRouter from "./routes/users";
@@ -30,13 +32,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors())
+// app.use(cors())
 const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
   }
 app.use(cors(corsOptions));
 app.options("*", cors())
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // app.use('/', indexRouter);
 app.use("/", memberRouter);
